@@ -1,18 +1,21 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Books from './books';
+import PropTypes from 'prop-types';
 
-class ReadingShelf extends Component {
-    // deverá filtrar os livros que aparecerão à partir do seu tipo
-    render(){
-        return(
-            <div>
-                <div className="bookshelf">
-                    <h2 className="bookshelf-title">{this.props.name}</h2>
-                    <Books books={this.props.shelf} handleChange={this.props.handleChange}/>
-                </div>
-            </div>
-        )
-    }
-}
+const ReadingShelf = props => (
+    <div>
+        <div className="bookshelf">
+            <h2 className="bookshelf-title">{props.name}</h2>
+            <Books loading={props.loading} books={props.shelf} handleChange={props.handleChange}/>
+        </div>
+    </div>
+)
+
+ReadingShelf.propTypes = {
+    name: PropTypes.string,
+    loading: PropTypes.bool,
+    shelf: PropTypes.arrayOf(PropTypes.object),
+    handleChange: PropTypes.func
+};
 
 export default ReadingShelf
